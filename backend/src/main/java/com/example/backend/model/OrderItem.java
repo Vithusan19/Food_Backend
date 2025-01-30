@@ -1,5 +1,7 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,13 +17,13 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderItemId;
 
-    private String name;
+    private String foodName;
 
     private int quantity;
 
-    private double price;
-
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private Order order;  // Reference to the order
+    @JsonBackReference  // Add this annotation
+    private Order order;
 }
+
